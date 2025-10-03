@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "sx58NncTPuE=",
+  "dgSpecHash": "x0S3I+vk3aw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\GIGABYTE\\ClockSln\\ClockStore\\ClockStore.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/workspaces/ClockStore_Web/ClockSln/ClockStore/ClockStore.csproj",
+  "expectedPackageFiles": [
+    "/home/codespace/.nuget/packages/microsoft.netcore.app.ref/6.0.36/microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.36/microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.36/microsoft.netcore.app.host.linux-x64.6.0.36.nupkg.sha512"
+  ],
   "logs": []
 }
