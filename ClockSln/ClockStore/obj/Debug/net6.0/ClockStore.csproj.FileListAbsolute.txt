@@ -1,0 +1,8 @@
+/workspaces/ClockStore_Web/ClockSln/ClockStore/obj/Debug/net6.0/ClockStore.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/ClockStore_Web/ClockSln/ClockStore/obj/Debug/net6.0/ClockStore.AssemblyInfoInputs.cache
+/workspaces/ClockStore_Web/ClockSln/ClockStore/obj/Debug/net6.0/ClockStore.AssemblyInfo.cs
+/workspaces/ClockStore_Web/ClockSln/ClockStore/obj/Debug/net6.0/ClockStore.csproj.CoreCompileInputs.cache
+/workspaces/ClockStore_Web/ClockSln/ClockStore/obj/Debug/net6.0/ClockStore.MvcApplicationPartsAssemblyInfo.cache
+/workspaces/ClockStore_Web/ClockSln/ClockStore/obj/Debug/net6.0/ClockStore.RazorAssemblyInfo.cache
+/workspaces/ClockStore_Web/ClockSln/ClockStore/obj/Debug/net6.0/ClockStore.RazorAssemblyInfo.cs
+/workspaces/ClockStore_Web/ClockSln/ClockStore/obj/Debug/net6.0/ClockStore.sourcelink.json
