@@ -1,0 +1,76 @@
+@page
+@model CartModel
+
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+<h2>Your cart</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Item</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines ?? Enumerable.Empty<ShoppingCartLine>()) {
+            <tr>
+                <td class="text-center">
+                    <form asp-page-handler="UpdateQuantity" method="post">
+                        <input type="hidden" name="ClockID" value="@line.Clock?.ClockID" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                        <button type="submit" name="action" value="decrement" class="btn btn-sm btn-secondary">-</button>
+                        <input type="number" name="quantity" value="@line.Quantity" class="form-control d-inline-block w-auto" min="1" />
+                        <button type="submit" name="action" value="increment" class="btn btn-sm btn-secondary">+</button>
+                    </form>
+                </td>
+                <td class="text-left">@(line.Clock?.Name ?? "N/A")</td>
+                <td class="text-right">@((line.Clock?.Price ?? 0).ToString("c"))</td>
+                <td class="text-right">
+                    @((line.Quantity * (line.Clock?.Price ?? 0)).ToString("c"))
+                </td>
+                <td>
+                    <form asp-page-handler="Remove" method="post">
+                        <input type="hidden" name="ClockID"
+                               value="@line.Clock?.ClockID" />
+                        <input type="hidden" name="returnUrl"
+                               value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Remove
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="text-right">Total:</td>
+            <td></td>
+            <td></td>
+            <td class="text-right">
+                 @((Model.Cart?.ComputeTotalValue() ?? 0).ToString("c"))
+             </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue shopping</a>
+    <a class="btn btn-success" href="/Checkout">Buy</a>
+</div>

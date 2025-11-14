@@ -1,0 +1,18 @@
+@model Clock
+@using ClockStore.Infrastructure
+
+<div class="card m-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Description</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="badge bg-primary rounded-pill">@Model.Category</span>
+            <form id="addForm-@Model.ClockID" asp-page="/Cart" method="post">
+                <input type="hidden" name="productID" value="@Model.ClockID" />
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <span class="text-primary">@Model.Price.ToString("C0")</span>
+                <button type="submit" class="btn btn-success btn-sm">Add To Cart</button>
+            </form>
+        </div>
+    </div>
+</div>

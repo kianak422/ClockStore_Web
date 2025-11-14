@@ -1,0 +1,31 @@
+@model ClockStore.Models.LoginModel
+
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "_Layout";
+}
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success">@TempData["message"]</div>
+}
+
+<div class="form-container login-form-container">
+    <form asp-action="Login" asp-controller="Account" method="post">
+        <h2>Đăng nhập</h2>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="form-group">
+            <label asp-for="Name">Email</label>
+            <input asp-for="Name" class="login-input" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Mật khẩu</label>
+            <input asp-for="Password" class="login-input" />
+        </div>
+        <button type="submit" class="btn login-button">Đăng nhập</button>
+        <p class="switch-form login-switch-form">
+            Chưa có tài khoản? <a asp-action="Register" asp-controller="Account">Đăng ký ngay</a>
+        </p>
+    </form>
+</div>
