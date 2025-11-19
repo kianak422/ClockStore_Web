@@ -1,0 +1,33 @@
+@model ClockStore.Models.RegisterModel
+
+@{ 
+    ViewBag.Title = "Đăng ký";
+    Layout = "_Layout";
+}
+
+<div class="form-container register-form-container">
+    <form asp-action="Register" asp-controller="Account" method="post">
+        <h2>Tạo tài khoản</h2>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name">Tên hiển thị</label>
+            <input asp-for="Name" class="register-input" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="register-input" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Mật khẩu</label>
+            <input asp-for="Password" class="register-input" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword">Xác nhận Mật khẩu</label>
+            <input asp-for="ConfirmPassword" class="register-input" />
+        </div>
+        <button type="submit" class="btn register-button">Đăng ký</button>
+        <p class="switch-form register-switch-form">
+            Đã có tài khoản? <a asp-action="Login" asp-controller="Account">Đăng nhập</a>
+        </p>
+    </form>
+</div>
