@@ -1,0 +1,79 @@
+@using Microsoft.AspNetCore.Identity
+@using ClockStore.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ClockStore</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/pagination.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ClockStore.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="bg-dark text-white p-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 navbar-brand">
+            <img src="~/images/DANIWORD.png" alt="DW Logo" style="height: 50px; vertical-align: middle; margin-right: 5px;" />
+              DANI WORLD
+        </div>
+                <div class="col-6 text-end">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="/Cart">Giỏ hàng</a></li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li><a class="dropdown-item" asp-action="Profile" asp-controller="Account">Thông tin cá nhân</a></li>
+                                <li><a class="dropdown-item" asp-action="Orders" asp-controller="Order">Đơn hàng</a></li>
+                                <li><a class="dropdown-item" asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+                                <li><a class="dropdown-item" asp-action="Logout" asp-controller="Account">Đăng xuất</a></li>
+                            }
+                            else
+                            {
+                                <li><a class="dropdown-item" asp-action="Login" asp-controller="Account">Đăng nhập</a></li>
+                                <li><a class="dropdown-item" asp-action="Register" asp-controller="Account">Đăng ký</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @{ 
+        var isAuthPage = ViewContext.RouteData.Values["controller"]?.ToString() == "Account" && 
+                         (ViewContext.RouteData.Values["action"]?.ToString() == "Login" || 
+                          ViewContext.RouteData.Values["action"]?.ToString() == "Register");
+    }
+    <main class="flex-grow-1 d-flex">
+        @if (!isAuthPage)
+        {
+        <div id="categories" class="col-3">
+            <vc:navigation-menu />
+        </div>
+        }
+        <div class="@(isAuthPage ? "col-12 centered-page" : "col-9 flex-grow-1")">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - ClockStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

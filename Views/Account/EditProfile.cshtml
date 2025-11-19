@@ -1,0 +1,41 @@
+@using Microsoft.AspNetCore.Identity
+@model IdentityUser
+
+@{ 
+    ViewBag.Title = "Chỉnh sửa thông tin";
+}
+
+<h2 class="text-center">Chỉnh sửa thông tin người dùng</h2>
+
+<form asp-action="EditProfile" method="post" class="p-4 bg-light rounded shadow-sm">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="UserName" class="form-label"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="FullName" class="form-label">Họ và tên:</label>
+        <input type="text" id="FullName" name="FullName" class="form-control" value="" placeholder="Nhập họ và tên của bạn" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="PhoneNumber" class="form-label">Số điện thoại:</label>
+        <input asp-for="PhoneNumber" class="form-control" type="tel" maxlength="10" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+        <a asp-action="Profile" class="btn btn-secondary">Hủy</a>
+    </div>
+</form>
