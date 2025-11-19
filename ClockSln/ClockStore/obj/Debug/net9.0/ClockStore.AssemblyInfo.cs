@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClockStore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57a5a9299c8d1531e2d8dd58ca433882f31cbde5")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClockStore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClockStore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
