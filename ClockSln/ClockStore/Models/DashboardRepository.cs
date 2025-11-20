@@ -52,7 +52,7 @@ namespace ClockStore.Models
                 .Select(g => new
                 {
                     Date = g.Key.ToString("dd/MM"),
-                    Revenue = g.Sum(o => o.Lines.Sum(l => (l.Clock.Price) * l.Quantity))
+                    Revenue = g.Sum(o => o.Lines.Sum(l => (l.Clock == null ? 0 : l.Clock.Price) * l.Quantity))
                 })
                 .OrderBy(x => x.Date)
                 .Take(7)
@@ -67,7 +67,7 @@ namespace ClockStore.Models
             var data = await _context.Orders
                 .SelectMany(o => o.Lines)
                 .Include(l => l.Clock)
-                .GroupBy(l => l.Clock.Name)
+                .GroupBy(l => l.Clock == null ? "Unknown Product" : l.Clock.Name)
                 .Select(g => new
                 {
                     ProductName = g.Key,
