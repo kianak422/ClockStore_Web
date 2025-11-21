@@ -1,0 +1,82 @@
+@{
+    Layout = "_DashboardLayout";
+}
+
+<h1 class="h2">Bảng điều khiển</h1>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Tổng số đơn hàng</h5>
+                <p class="card-text">@ViewBag.TotalOrders</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Tổng doanh thu</h5>
+                <p class="card-text">@string.Format("${0:N2}", ViewBag.TotalRevenue ?? 0M)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Sản phẩm bán chạy nhất</h5>
+                <ul class="list-group">
+                    @if (ViewBag.TopProducts != null)
+                    {
+                        @foreach (var product in ViewBag.TopProducts)
+                        {
+                            <li class="list-group-item">@product.ProductName: @product.Quantity</li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item">No top products available.</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Đơn hàng gần đây</h5>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Khách hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.RecentOrders != null)
+                        {
+                            @foreach (var order in ViewBag.RecentOrders)
+                            {
+                                @if (order != null)
+                                {
+                                    <tr>
+                                        <td>@(order.Order?.OrderID.ToString() ?? "N/A")</td>
+                                        <td>@(order.Order?.Name ?? "N/A")</td>
+                                        <td>@(order.Order?.OrderDate.ToString("yyyy-MM-dd") ?? "N/A")</td>
+                                        <td>@string.Format("${0:N2}", order.Total)</td>
+                                        <td>@(order.Order?.Shipped == true ? "Đã giao" : "Đang xử lý")</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

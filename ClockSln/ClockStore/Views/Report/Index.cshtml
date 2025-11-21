@@ -1,0 +1,59 @@
+@model ClockStore.Models.ViewModels.ReportViewModel
+
+@{ 
+    ViewBag.Title = "Báo cáo";
+    Layout = "_DashboardLayout";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Báo cáo tổng quan</h2>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Tổng quan đơn hàng và doanh thu
+            </div>
+            <div class="card-body">
+                <p><strong>Tổng số đơn hàng:</strong> @Model.TotalOrders</p>
+                <p><strong>Tổng doanh thu:</strong> @string.Format("{0:C}", Model.TotalRevenue)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Doanh số theo kỳ
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach (var item in Model.SalesByPeriod)
+                    {
+                        <li class="list-group-item">@item.Date: @string.Format("{0:C}", item.Revenue)</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Top sản phẩm bán chạy
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach (var item in Model.TopProducts)
+                    {
+                        <li class="list-group-item">@item.ProductName: @item.Quantity</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

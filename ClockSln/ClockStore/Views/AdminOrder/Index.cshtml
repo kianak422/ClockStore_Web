@@ -1,0 +1,55 @@
+@model IEnumerable<Order>
+
+@{ 
+    ViewBag.Title = "Orders";
+    Layout = "_DashboardLayout";
+}
+
+<div class="text-center">
+    <h2>Orders</h2>
+    @if (Model.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th colspan="2">Details</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Order o in Model)
+                {
+                    <tr>
+                        <td>@o.Name</td>
+                        <td>@o.City</td>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <td>
+                            <form asp-action="MarkShipped" method="post">
+                                <input type="hidden" name="orderID" value="@o.OrderID" />
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    Ship
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @foreach (ShoppingCartLine line in o.Lines ?? Enumerable.Empty<ShoppingCartLine>())
+                    {
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>@line.Clock?.Name</td>
+                            <td>@line.Quantity</td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2 class="p-2">No orders</h2>
+    }
+</div>

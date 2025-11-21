@@ -1,0 +1,46 @@
+@model IEnumerable<Clock>
+
+@{ 
+    ViewBag.Title = "Products";
+    Layout = "_DashboardLayout";
+}
+
+<div class="text-center">
+    <h2>Products</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.ClockID</td>
+                    <td>@p.Name</td>
+                    <td>@p.Category</td>
+                    <td>@p.Price.ToString("c")</td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <a asp-action="Edit" asp-route-clockId="@p.ClockID" class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
+                            <input type="hidden" name="clockId" value="@p.ClockID" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a asp-action="Create" class="btn btn-primary">Add New Product</a>
+    </div>
+</div>
